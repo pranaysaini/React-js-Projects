@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom'
+
 const Navbar = () => {
     
     return (
@@ -14,10 +16,10 @@ const Navbar = () => {
                 </div>
 
                 <ul className="flex justify-center items-center gap-10">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Teachers</a></li>
-                    <li><a href="#">Holidays</a></li>
-                    <li><a href="#">Contact Us</a></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/teachers">Teachers</Link></li>
+                    <li><Link to="/holidays">Holidays</Link></li>
+                    <li><a href="/contact-us">Contact Us</a></li>
                     <li className="bg-blue-700 text-white w-32 h-10 flex justify-center items-center border rounded-lg hover:bg-blue-500 cursor-pointer"><a href="#">Talk to us</a></li>
                 </ul>
                 
