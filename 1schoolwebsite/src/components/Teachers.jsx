@@ -100,7 +100,6 @@ const Teachers = () => {
                                 <p className="text-gray-500 font-bold">{items.qua}</p>
                             </div>
                             
-
                         </div>
                     )
                 })}
