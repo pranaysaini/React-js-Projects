@@ -9,6 +9,9 @@ function App() {
   const [text, setText] = useState("")
   const[size, setSize] = useState(30)
   const [mycolor, setMyColor] = useState("#ddd")
+  const [prod, setProd] = useState("");
+  const [write, setWrite] = useState([]);
+  const [students, setStudents] = useState("Romeo")
 
 
   const toggleFunc = () => {
@@ -30,6 +33,17 @@ function App() {
   const boxColor = (event) => {
     setMyColor(event.target.value)
   }
+  
+  const newItem = (event) => {
+    setProd(event.target.value)
+  }
+  
+  const addNewProduct = () => {
+    setWrite([...write, prod])
+    setProd('')
+  }
+
+
 
   return (
     <>
@@ -90,6 +104,31 @@ function App() {
 
             <div className='w-56 h-24' style={{backgroundColor: mycolor}}></div>
           </div>
+
+
+
+          <div className="mt-10">
+            <h1 className="text-4xl font-bold">Add Products</h1>
+
+            <div className='mt-6'>
+              <input type="text" placeholder='Product Name' className="h-10 w-80 border border-double border-black p-3 rounded-lg" 
+                      onChange={newItem} value={prod}/>
+
+              <button className='w-20 h-10 bg-orange-500 rounded-lg ml-2'
+                      onClick={addNewProduct}>Add</button>
+            </div>
+
+            <ul className="list-disc">
+              {write.map((item, index) => (
+                <li key={index}> {item} </li>
+              ))}
+            </ul>
+          </div>
+          
+          
+
+
+
 
         </div>
       </div>
