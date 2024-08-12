@@ -4,6 +4,13 @@ import './App.css'
 function App() {
   
   const[open, setOpen] = useState(false)
+  const [students, setStudents] = useState([])
+  const [form, setForm] = useState({
+    fullname: '',
+    class: '',
+    roll: '',
+    dob: '',
+})
 
   const openDraw = () => {
     setOpen(!open)
@@ -13,11 +20,34 @@ function App() {
     setOpen(false)
   }
 
+  const handleInput = (event) => {
+    const value = event.target.value
+    const key = event.target.name
+    setForm({
+      ...form,
+      [key]: value
+    })
+    
+  }
+
+  const submit = (event) => {
+    event.preventDefault()
+    setStudents([
+      ...students,
+      form
+    ])
+    setForm({
+      fullname: '',
+      class: '',
+      roll: '',
+      dob: ''
+    })
+    
+  }
+
+
   return (
     
-        
-        
-
         
         <div className="h-screen w-full bg-slate-300 m-0 p-0">
 
@@ -35,35 +65,39 @@ function App() {
                             }`}>
             
             <button className="text-white bg-violet-700 w-24 h-10 font-bold rounded-md hover:bg-violet-600"
-                    onClick={closeDraw}>Close</button>
+                    onClick={closeDraw}> Close </button>
             <h1 className="text-3xl text-center font-bold mt-4">New Student</h1>
 
             
             
-            <form className="flex flex-col gap-8 mt-8">
+            <form className="flex flex-col gap-8 mt-8" onSubmit={submit}>
               <div className=" flex flex-col gap-1">
-                <label htmlFor="name" className="font-bold text-2xl">Name</label>
-                <input type="text" name="name" placeholder='Enter Full Name' className="h-10 w-96 border border-black p-2  " />
+                <label htmlFor="fullname" className="font-bold text-2xl">Name</label>
+                <input type="text" name="fullname" placeholder='Enter Full Name' className="h-10 w-96 border border-black p-2 "
+                        onChange={handleInput} value={form.fullname}/>
               </div>
 
               <div className=" flex flex-col gap-1">
                 <label htmlFor="class" className="font-bold text-2xl">Class</label>
-                <input type="number" name="class" placeholder='Enter Class' className="h-10 w-96 border border-black  p-2 " />
+                <input type="number" name="class" placeholder='Enter Class' className="h-10 w-96 border border-black  p-2 "
+                       onChange={handleInput} value={form.class}/>
               </div>
 
               <div className=" flex flex-col gap-1">
                 <label htmlFor="roll" className="font-bold text-2xl">Roll Number</label>
-                <input type="number" name="roll" placeholder='Enter Roll Number' className="h-10 w-96 border border-black  p-2 " />
+                <input type="number" name="roll" placeholder='Enter Roll Number' className="h-10 w-96 border border-black  p-2 "
+                        onChange={handleInput} value={form.roll}/>
               </div>
 
               
 
               <div className=" flex flex-col gap-1">
-                <label htmlFor="name" className="font-bold text-2xl">Date of Birth</label>
-                <input type="date" name="name"  className="h-10 w-96 border border-black  p-2 " />
+                <label htmlFor="dob" className="font-bold text-2xl">Date of Birth</label>
+                <input type="date" name="dob"  className="h-10 w-96 border border-black  p-2 " 
+                        onChange={handleInput} value={form.dob}/>
               </div>
 
-              <button className="h-12 w-96  mt-5 bg-violet-700 text-white font-bold border rounded-md hover:bg-violet-600 ">SUBMIT</button>
+              <button className="h-12 w-96  mt-5 bg-violet-700 text-white font-bold border rounded-md hover:bg-violet-600">SUBMIT</button>
             
             </form>
           </aside>
@@ -81,69 +115,23 @@ function App() {
               </tr>
               
             </thead>
-
+            
             <tbody className='border border-collapse'>
 
-              <tr>
-                <td className="p-4 text-center">1</td>
-                <td className="p-4 text-center">Rohan Das</td>
-                <td className="p-4 text-center">12</td>
-                <td className="p-4 text-center">24</td>
-                <td className="p-4 text-center">12/02/2003</td>
-                <td className="p-4 flex gap-4 justify-center items-center">
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Edit</button>
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Delete</button>
-                </td>
-              </tr>
-              
-            </tbody>
+              {students.map((student, index) => (
+                <tr key={index}>
+                  <td className="p-4 text-center">{index + 1}</td>
+                  <td className="p-4 text-center">{student.fullname}</td>
+                  <td className="p-4 text-center">{student.class}</td>
+                  <td className="p-4 text-center">{student.roll}</td>
+                  <td className="p-4 text-center">{student.dob}</td>
+                  <td className="p-4 flex gap-4 justify-center items-center">
+                    <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Edit</button>
+                    <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Delete</button>
+                  </td>
+                </tr>
+          ))}
 
-            <tbody className='border border-collapse'>
-
-              <tr>
-                <td className="p-4 text-center">1</td>
-                <td className="p-4 text-center">Rohan Das</td>
-                <td className="p-4 text-center">12</td>
-                <td className="p-4 text-center">24</td>
-                <td className="p-4 text-center">12/02/2003</td>
-                <td className="p-4 flex gap-4 justify-center items-center">
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Edit</button>
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Delete</button>
-                </td>
-              </tr>
-              
-            </tbody>
-
-            <tbody className='border border-collapse'>
-
-              <tr>
-                <td className="p-4 text-center">1</td>
-                <td className="p-4 text-center">Rohan Das</td>
-                <td className="p-4 text-center">12</td>
-                <td className="p-4 text-center">24</td>
-                <td className="p-4 text-center">12/02/2003</td>
-                <td className="p-4 flex gap-4 justify-center items-center">
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Edit</button>
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Delete</button>
-                </td>
-              </tr>
-              
-            </tbody>
-
-            <tbody className='border border-collapse'>
-
-              <tr>
-                <td className="p-4 text-center">1</td>
-                <td className="p-4 text-center">Rohan Das</td>
-                <td className="p-4 text-center">12</td>
-                <td className="p-4 text-center">24</td>
-                <td className="p-4 text-center">12/02/2003</td>
-                <td className="p-4 flex gap-4 justify-center items-center">
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Edit</button>
-                  <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Delete</button>
-                </td>
-              </tr>
-              
             </tbody>
           </table>
             
