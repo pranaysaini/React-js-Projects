@@ -2,15 +2,19 @@ import { useState } from 'react'
 import './App.css'
 
 function App() {
-  
-  const[open, setOpen] = useState(false)
-  const [students, setStudents] = useState([])
-  const [form, setForm] = useState({
+
+  const model = {
     fullname: '',
     class: '',
     roll: '',
     dob: '',
-})
+
+  }
+  
+  const [editIndex, setEditIndex] = useState(null)
+  const[open, setOpen] = useState(false)
+  const [students, setStudents] = useState([])
+  const [form, setForm] = useState(model)
 
   const openDraw = () => {
     setOpen(!open)
@@ -27,7 +31,6 @@ function App() {
       ...form,
       [key]: value
     })
-    
   }
 
   const submit = (event) => {
@@ -36,14 +39,34 @@ function App() {
       ...students,
       form
     ])
-    setForm({
-      fullname: '',
-      class: '',
-      roll: '',
-      dob: ''
-    })
+    setForm(model)
     
   }
+
+  const deleteStudent = (index) => {
+    const backup = [...students]
+    backup.splice(index, 1)
+    setStudents(backup)
+  }
+
+  const editStudent = (index) => {
+      setOpen(true)
+      setForm(students[index])
+      setEditIndex(index)
+  }
+  
+  const saveStudent = (event) => {
+        event.preventDefault()
+        const backup = [...students]
+        backup[editIndex] = form
+        setStudents(backup)
+        setForm(model)
+        setEditIndex(null)
+        setOpen(false)
+  }
+
+
+  
 
 
   return (
@@ -70,7 +93,7 @@ function App() {
 
             
             
-            <form className="flex flex-col gap-8 mt-8" onSubmit={submit}>
+            <form className="flex flex-col gap-8 mt-8" onSubmit={editIndex === null ? submit : saveStudent}>
               <div className=" flex flex-col gap-1">
                 <label htmlFor="fullname" className="font-bold text-2xl">Name</label>
                 <input type="text" name="fullname" placeholder='Enter Full Name' className="h-10 w-96 border border-black p-2 "
@@ -97,7 +120,10 @@ function App() {
                         onChange={handleInput} value={form.dob}/>
               </div>
 
-              <button className="h-12 w-96  mt-5 bg-violet-700 text-white font-bold border rounded-md hover:bg-violet-600">SUBMIT</button>
+              <button className="h-12 w-96 mt-5 bg-violet-700 text-white font-bold border rounded-md hover:bg-violet-600">
+                    {editIndex === null ? 'SUBMIT' : 'SAVE'}
+              </button>
+
             
             </form>
           </aside>
@@ -126,8 +152,11 @@ function App() {
                   <td className="p-4 text-center">{student.roll}</td>
                   <td className="p-4 text-center">{student.dob}</td>
                   <td className="p-4 flex gap-4 justify-center items-center">
-                    <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Edit</button>
-                    <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'>Delete</button>
+
+                    <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'
+                            onClick={() => editStudent(index)}>Edit</button>
+                    <button className='h-9 w-20 bg-indigo-700 rounded-md text-white text-sm font-bold hover:bg-indigo-600'
+                            onClick={() => deleteStudent(index)}>Delete</button>
                   </td>
                 </tr>
           ))}
