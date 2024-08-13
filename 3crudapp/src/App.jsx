@@ -60,13 +60,11 @@ function App() {
         const backup = [...students]
         backup[editIndex] = form
         setStudents(backup)
+        
         setForm(model)
         setEditIndex(null)
         setOpen(false)
   }
-
-
-  
 
 
   return (
