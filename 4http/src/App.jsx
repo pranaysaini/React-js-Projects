@@ -86,7 +86,7 @@ function App() {
                       <div key={index}>
 
                         <div className="mt-20 w-96 mx-auto shadow-[0px_4px_10px_rgba(0,0,0,0.3)] p-7 bg-rose-400">
-                          <h2 className='text-2xl font-bold'>{items.name}</h2>
+                          <h2 className='text-2xl font-bold text-bold'>{items.name}</h2>
                           <p>User Name : {items.username}</p>
                           <p>E-mail : <span className='text-blue-700 underline'>{items.email}</span></p>
 
@@ -96,11 +96,8 @@ function App() {
 
                     ))
                   }
-
-
                   
                 </div>
-      
       </div>
     </>
   )
