@@ -38,25 +38,23 @@ function App() {
         [key]: null
       }))
     }
-
   }
 
-  
+           
+    const assignValue = (event) => {
 
-  const assignValue = (event) => {
+      event.preventDefault()
+      const value = event.target.value;
+      const key = event.target.name;
+      
+      setForm((prev) => ({
+        ...prev,
+        [key]: value
+      }))
 
-    event.preventDefault()
-    const value = event.target.value;
-    const key = event.target.name;
+      validator(key, value)
+    }
     
-    setForm((prev) => ({
-      ...prev,
-      [key]: value
-    }))
-
-    validator(key, value)
-  }
-  
   
   const submitForm = (event) => {
       event.preventDefault()
