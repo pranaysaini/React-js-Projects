@@ -6,7 +6,7 @@ import "swiper/css"
 import 'swiper/css/navigation';
 
 
-const Home = () => {
+const MainProducts = () => {
 
     const [prod, setProd] = useState([
 
@@ -52,26 +52,51 @@ const Home = () => {
             thumbnail: '/images/TeachersImages/f.webp'
         },
 
+        {
+            title: 'Blue Mens T-Shirt',
+            price: 1200,
+            discount: 15,
+            thumbnail: '/images/TeachersImages/f.webp'
+        },
+
+        {
+            title: 'Blue Mens T-Shirt',
+            price: 1200,
+            discount: 15,
+            thumbnail: '/images/TeachersImages/f.webp'
+        },
+
+        {
+            title: 'Blue Mens T-Shirt',
+            price: 1200,
+            discount: 15,
+            thumbnail: '/images/TeachersImages/f.webp'
+        },
+
+        {
+            title: 'Blue Mens T-Shirt',
+            price: 1200,
+            discount: 15,
+            thumbnail: '/images/TeachersImages/f.webp'
+        },
+
+        {
+            title: 'Blue Mens T-Shirt',
+            price: 1200,
+            discount: 15,
+            thumbnail: '/images/TeachersImages/f.webp'
+        }
+
     ])
 
     return (
         <Layout>
             <div>
-                <header>
-                    <Swiper
-                        slidesPerView={1}
-                        navigation={true}
-                        >
-                        <SwiperSlide><img src="/images/Banner/a.png" /></SwiperSlide>
-                        <SwiperSlide><img src="/images/Banner/b.png" /></SwiperSlide>
-                        <SwiperSlide><img src="/images/Banner/c.png" /></SwiperSlide>
-                        <SwiperSlide><img src="/images/Banner/d.png" /></SwiperSlide>
-                    </Swiper>
-                </header>
+                
 
                 <div className="p-10">
-                    <h1 className="text-center text-3xl font-semibold font-">Featured Products</h1>
-                    <div className='w-full mx-auto grid md:grid-cols-3'>
+                    <h1 className="text-center text-3xl font-semibold font-">All Products</h1>
+                    <div className='md:w-full mx-auto grid md:grid-cols-3'>
                         
                             {
                                 prod.map((items, index)=>(
@@ -102,4 +127,4 @@ const Home = () => {
         </Layout>
     )
 }
-export default Home
+export default MainProducts
