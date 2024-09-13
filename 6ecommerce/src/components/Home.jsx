@@ -89,8 +89,6 @@ const Home = () => {
                                             <button className='bg-green-600 text-white rounded-lg h-[40px] w-32 hover:bg-green-400 hover:text-black'>ADD to CART</button>
                                         </div>
 
-                                        
-                                        
                                     </div>
                                 ))
                             }
